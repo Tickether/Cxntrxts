@@ -42,6 +42,9 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
 
     string public baseTokenURI;
 
+    string public _name;
+
+    string public _symbol;
 
 
     address payable public solscriptionTreasury = payable(0x7ea9114092eC4379FFdf51bA6B72C71265F33e96);
@@ -64,12 +67,7 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
     event Revoke(address indexed to, uint256 indexed tokenId);
 
 
-    constructor(
-        
-        string memory _name,
-        string memory _symbol
-        
-    ) ERC721(_name, _symbol) {}
+    constructor() ERC721(_name, _symbol) {}
 
 
 
@@ -104,29 +102,24 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
 
 
     /*
-    * Change subscription price - USDC per token (remember USDC contracts only have 6 decimal places)
+    * Change subscription price - USDC per token (remember USDC contracts only have 6 decimal places) Change subscription price - Native token EVM // Change max monthly subscription cap
     */
-    function setSubscriptionFee(uint256 newSubscriptionFee) public onlyOwner {
+    function setFeesMaxMonth(uint256 newSubscriptionFee, uint256 newSubscriptionFeeNative, uint256 newMaxMonthlySubs) public onlyOwner {
         subscriptionFee = newSubscriptionFee;
+        subscriptionFeeNative = newSubscriptionFeeNative;
+        maxMonthlySubs = newMaxMonthlySubs;
     }
 
 
 
-    /*
-    * Change subscription price - Native token EVM
-    */
+    /*   
     function setSubscriptionFeeNative(uint256 newSubscriptionFeeNative) public onlyOwner {
         subscriptionFeeNative = newSubscriptionFeeNative;
     }
-
-
-
-    /*
-    * Change max monthly subscription cap
-    */
     function setMaxMonthlySubs(uint256 newMaxMonthlySubs) public onlyOwner {
         maxMonthlySubs = newMaxMonthlySubs;
     }
+    */
 
 
 
@@ -147,6 +140,16 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
     function setBaseTokenURI(string memory newuri) public onlyOwner {
         baseTokenURI = newuri;
     }
+
+    //---------------------------------------------------------------------------------
+    /**
+    * Set name and symnol 
+    */
+    function setNameSymbol(string memory name, string memory symbol) public onlyOwner {
+        _name = name;
+        _symbol = symbol;
+    }
+    
 
 
 
