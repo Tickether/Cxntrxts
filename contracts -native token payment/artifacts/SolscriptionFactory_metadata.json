@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.18+commit.87f61d96"
 	},
 	"language": "Solidity",
 	"output": {
@@ -34,7 +34,13 @@
 					}
 				],
 				"name": "createSolscriptionContract",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -73,7 +79,7 @@
 		"compilationTarget": {
 			"SolscriptionFactory.sol": "SolscriptionFactory"
 		},
-		"evmVersion": "london",
+		"evmVersion": "paris",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -198,19 +204,19 @@
 			]
 		},
 		"Solscription.sol": {
-			"keccak256": "0x0c882c352844861597193c24b0949969b3a5394eb13d76b499ba02d5ec7ee657",
+			"keccak256": "0x661c1defc00ff880ce1b4ce790bb6bc38c46e7ac79a0cba73ea31a59da382a57",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5c5eade7b4786a5476c47539d8cff9cf32cdcbbccfd5a4d1b7d39b5657994dbc",
-				"dweb:/ipfs/QmfFhXJoFeF3KDBnyymBzM5hQDG4A4pvgFKvq3zjYUCqJP"
+				"bzz-raw://40d9441804e7f4f21eadc38c30143d9b2ea01ed6ceb5af97c84ecd8df6eea542",
+				"dweb:/ipfs/QmYWLHu6k64Pg5wVR4KXVcuVeQrgvdYJtvr6g6hs4YULq2"
 			]
 		},
 		"SolscriptionFactory.sol": {
-			"keccak256": "0xc1486421e76d082c004a9544a2dd2faacbe1a7d2970eef483a88d32e22ebdd7e",
+			"keccak256": "0x5a810d240abd52172dee2c5ac143e7df59bbcc19aef217b898a72176e6a652b2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6ee9136124a21781486694bbd2fa5f9d9fd272ce6fb71f7c1c8b1e1dae488236",
-				"dweb:/ipfs/QmdG37Buq57Tya2w8gckmPYZnef3m1Y4gpPQgtyu36iW2t"
+				"bzz-raw://a14d2079ef54d36be614b97cc08039c6c66e517d0fbb23eec1d305f68ec2d0d2",
+				"dweb:/ipfs/QmcvswLJ7uAKmWQq2U9MBo6gEoSeJY3Xzh9nnUPGQYYFKn"
 			]
 		}
 	},

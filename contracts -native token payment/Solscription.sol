@@ -1,9 +1,9 @@
 //SPDX-License-Identifier: MIT
-// Code by @0xGeeLoko
+//Code by @0xGeeLoko
 
 
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.9;
 
 
 
@@ -77,7 +77,7 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
     function withdraw() external nonReentrant
     {
         require(msg.sender == solscriptionTreasury || msg.sender == owner(), "Invalid sender");
-        (bool success, ) = solscriptionTreasury.call{value: address(this).balance / 100 * 3}(""); 
+        (bool success, ) = solscriptionTreasury.call{value: address(this).balance / 100 * 1}(""); 
         (bool success2, ) = owner().call{value: address(this).balance}(""); 
         require(success, "Transfer 1 failed");
         require(success2, "Transfer 2 failed");
@@ -89,7 +89,7 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
         IERC20 tokenContract = IERC20(erc20Contract);
 
         uint256 totalBalance = tokenContract.balanceOf(address(this));
-        uint256 treasurySplit = totalBalance / 100 * 3; // set split
+        uint256 treasurySplit = totalBalance / 100 * 1; // set split
         uint256 ownerSplit = totalBalance - treasurySplit;
 
         bool treasuryTransfer = tokenContract.transfer(solscriptionTreasury, treasurySplit);

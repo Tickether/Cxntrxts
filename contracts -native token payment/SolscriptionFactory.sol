@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
-// Code by @0xGeeLoko
+//Code by @0xGeeLoko
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.9;
 
 import "./Solscription.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
@@ -16,7 +16,7 @@ contract SolscriptionFactory is ReentrancyGuard {
         uint256 subscriptionFee, 
         uint256 subscriptionFeeNative, 
         uint256 maxMonthlySubs
-    ) external nonReentrant {
+    ) nonReentrant external returns (address) {
         Solscription solscription = new Solscription();
         
         solscriptionContracts.push(solscription);
@@ -24,5 +24,7 @@ contract SolscriptionFactory is ReentrancyGuard {
         solscription.setNameSymbol(name, symbol);
         solscription.setFeesMaxMonth(subscriptionFee, subscriptionFeeNative, maxMonthlySubs);
         solscription.transferOwnership(msg.sender);
+
+        return address(solscription);
     }
 }
