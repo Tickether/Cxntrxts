@@ -6,7 +6,18 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_symbol",
+						"type": "string"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -130,32 +141,6 @@
 				"type": "event"
 			},
 			{
-				"inputs": [],
-				"name": "_name",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "_symbol",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -203,20 +188,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "flipRentNativeState",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "flipRentState",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -487,24 +458,6 @@
 					}
 				],
 				"name": "setFeesMaxMonth",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "symbol",
-						"type": "string"
-					}
-				],
-				"name": "setNameSymbol",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -847,9 +800,6 @@
 				"setBaseTokenURI(string)": {
 					"notice": "Change BaseTokenUri "
 				},
-				"setNameSymbol(string,string)": {
-					"notice": "Set name and symnol "
-				},
 				"setUser(uint256,address,uint64)": {
 					"notice": "set the user and expires of an NFT in ERC20 preference USDC"
 				},
@@ -995,11 +945,11 @@
 			]
 		},
 		"MetaEstateRents.sol": {
-			"keccak256": "0x598a5846b2b6cad172c2912eda7642c612ec1a0e0fa3334793ad40c329df77f8",
+			"keccak256": "0x786cf661583a5df4834caaeee041c315b04e728afb5e6f6479ed549c40eec69d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2c5291509316437bb2e29a219f8a549b9a3920b8d78e7b9df1dfb3646814a7ed",
-				"dweb:/ipfs/QmZERbgZGsAcdFWDgpVW4qPoZza281Xqqu8fNjtXRjF2nP"
+				"bzz-raw://8fce09969beb08633f2a1cb8f6b8fb5f12111a38c23a984c0849dfc4f26b167d",
+				"dweb:/ipfs/QmZW16vW7kGcJttxngzjZVYxYTAFfuSfjJw7ih3feyhLde"
 			]
 		}
 	},

@@ -41,9 +41,7 @@ contract MetaEstateRents is ERC721, IERC4907, Ownable, ReentrancyGuard {
 
     string public baseTokenURI;
 
-    string public _name;
 
-    string public _symbol;
 
 
     address payable public treasury = payable(0x7ea9114092eC4379FFdf51bA6B72C71265F33e96);
@@ -62,7 +60,7 @@ contract MetaEstateRents is ERC721, IERC4907, Ownable, ReentrancyGuard {
 
 
 
-    constructor() ERC721(_name, _symbol) {}
+    constructor( string memory _name, string memory _symbol) ERC721(_name, _symbol) {}
 
 
 
@@ -143,33 +141,7 @@ contract MetaEstateRents is ERC721, IERC4907, Ownable, ReentrancyGuard {
         baseTokenURI = newuri;
     }
 
-    //---------------------------------------------------------------------------------
-    /**
-    * Set name and symnol 
-    */
-    function setNameSymbol(string memory name, string memory symbol) public onlyOwner {
-        _name = name;
-        _symbol = symbol;
-    }
-    
 
-
-
-    /*
-    * Pause usdc or erc20 subs if active, make active if paused
-    */
-    function flipRentState() public onlyOwner {
-        rentIsActive = !rentIsActive;
-    }
-
-
-
-    /*
-    * Pause eth or evm native currency subs if active, make active if paused
-    */
-    function flipRentNativeState() public onlyOwner {
-        rentNativeIsActive = !rentNativeIsActive;
-    }
 
 
 
@@ -180,8 +152,6 @@ contract MetaEstateRents is ERC721, IERC4907, Ownable, ReentrancyGuard {
     /// @param user  The new user of the NFT
     /// @param expires  UNIX timestamp, The new user could use the NFT before expires
     function setUser(uint256 tokenId, address user, uint64 expires) public virtual override{
-        require(_isApprovedOrOwner(msg.sender, tokenId), "yo, cant do that shit lol");
-        require(!rentIsActive, "rent active");
         require(expires <= maxMonthlyRent, "Exceeds max sub period");
         require(ownerOf(tokenId) == owner(), "property sold, can't rent");
         
@@ -197,7 +167,7 @@ contract MetaEstateRents is ERC721, IERC4907, Ownable, ReentrancyGuard {
         uint64 timestamp = uint64(block.timestamp);
         
         UserInfo storage info =  _users[tokenId];
-        require(info.expires < timestamp, "user already subscribed");
+        require(info.expires < timestamp, "already rented");
         
         info.user = user;
         info.expires = rentPeriod + timestamp;
@@ -212,16 +182,15 @@ contract MetaEstateRents is ERC721, IERC4907, Ownable, ReentrancyGuard {
     /// @param user  The new user of the NFT
     /// @param expires  UNIX timestamp, The new user could use the NFT before expires
     function setUserNative(uint256 tokenId, address user, uint64 expires) public  virtual payable {
-        require(_isApprovedOrOwner(msg.sender, tokenId), "yo, cant do that shit lol");
-        require(!rentNativeIsActive, "rent active");
         require(expires <= maxMonthlyRent, "Exceeds max sub period");
         require(expires * rentFeeNative == msg.value, 'native token value sent is not correct');
+        require(ownerOf(tokenId) == owner(), "property sold, can't rent");
         
         uint64 rentPeriod = expires * 2592000; // timestamp for 30days multiplied by months to expire 
         uint64 timestamp = uint64(block.timestamp);
 
         UserInfo storage info =  _users[tokenId];
-        require(info.expires < timestamp, "user already subscribed");
+        require(info.expires < timestamp, "already rented");
         
         info.user = user;
         info.expires = rentPeriod + timestamp;
@@ -254,7 +223,7 @@ contract MetaEstateRents is ERC721, IERC4907, Ownable, ReentrancyGuard {
             return  _users[tokenId].expires;
         }
         else{
-            return uint256(99999999999999999999999999999999999999999999999999999999999);
+            return uint256(0);
         }
     }
 
@@ -311,22 +280,23 @@ contract MetaEstateRents is ERC721, IERC4907, Ownable, ReentrancyGuard {
     
     function _beforeTokenTransfer(
         address from,
-        address to,
-        uint256, /* firstTokenId */
-        uint256 batchSize
+        address /* to */,
+        uint256 firstTokenId,
+        uint256 /* batchSize */
     ) internal virtual override {
-        
-        require(from == address(0) || to == address(0), "can't transfer token");
-        
+
+        if(from != address(0)) {
+            require(_users[firstTokenId].user == address(0), "can't sell or tranfer rented property");
+    
+            delete _users[firstTokenId];
+            emit UpdateUser(firstTokenId, address(0), 0);
+
+        }
+
+       
+
     }
 
-    function _afterTokenTransfer(
-        address from,
-        address to,
-        uint256 firstTokenId,
-        uint256 batchSize
-    ) internal virtual override  {
-        
-    }
+   
 
 }
