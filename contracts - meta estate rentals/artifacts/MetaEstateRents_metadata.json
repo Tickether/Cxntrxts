@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.18+commit.87f61d96"
 	},
 	"language": "Solidity",
 	"output": {
@@ -179,12 +179,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "baseTokenURI",
+				"name": "erc20Contract",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "address",
 						"name": "",
-						"type": "string"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -234,7 +234,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_tokenURI",
+						"type": "string"
+					}
+				],
 				"name": "makeMetaEstateToken",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -422,19 +428,6 @@
 					}
 				],
 				"name": "setApprovalForAll",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "newuri",
-						"type": "string"
-					}
-				],
-				"name": "setBaseTokenURI",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -701,6 +694,17 @@
 			}
 		],
 		"devdoc": {
+			"events": {
+				"Approval(address,address,uint256)": {
+					"details": "Emitted when `owner` enables `approved` to manage the `tokenId` token."
+				},
+				"ApprovalForAll(address,address,bool)": {
+					"details": "Emitted when `owner` enables or disables (`approved`) `operator` to manage all of its assets."
+				},
+				"Transfer(address,address,uint256)": {
+					"details": "Emitted when `tokenId` token is transferred from `from` to `to`."
+				}
+			},
 			"kind": "dev",
 			"methods": {
 				"approve(address,uint256)": {
@@ -756,9 +760,6 @@
 				"symbol()": {
 					"details": "See {IERC721Metadata-symbol}."
 				},
-				"tokenURI(uint256)": {
-					"details": "See {ERC721Metadata-tokenURI}."
-				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See {IERC721-transferFrom}."
 				},
@@ -794,11 +795,8 @@
 			},
 			"kind": "user",
 			"methods": {
-				"makeMetaEstateToken()": {
+				"makeMetaEstateToken(string)": {
 					"notice": "public subscription"
-				},
-				"setBaseTokenURI(string)": {
-					"notice": "Change BaseTokenUri "
 				},
 				"setUser(uint256,address,uint64)": {
 					"notice": "set the user and expires of an NFT in ERC20 preference USDC"
@@ -820,7 +818,7 @@
 		"compilationTarget": {
 			"MetaEstateRents.sol": "MetaEstateRents"
 		},
-		"evmVersion": "london",
+		"evmVersion": "paris",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -878,6 +876,14 @@
 			"urls": [
 				"bzz-raw://6e75cf83beb757b8855791088546b8337e9d4684e169400c20d44a515353b708",
 				"dweb:/ipfs/QmYvPafLfoquiDMEj7CKHtvbgHu7TJNPSVPSCjrtjV8HjV"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+			"keccak256": "0x5c3501c1b70fcfc64417e9da5cc6a3597191baa354781e508e1e14cc0e50a038",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://899c87a849a94c848818d0afede6961d2c87665af1dd23a5c983e78981a65691",
+				"dweb:/ipfs/QmUeFDffQRDmX87FX3MRxN3bmpUxDTWpWLwPJzeAJ3yF6H"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
@@ -945,11 +951,11 @@
 			]
 		},
 		"MetaEstateRents.sol": {
-			"keccak256": "0x786cf661583a5df4834caaeee041c315b04e728afb5e6f6479ed549c40eec69d",
+			"keccak256": "0xa03097fa45a9ed56a59e4b9cb77df8c8ed5e7391a13c2b4d5704864ae1aab920",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8fce09969beb08633f2a1cb8f6b8fb5f12111a38c23a984c0849dfc4f26b167d",
-				"dweb:/ipfs/QmZW16vW7kGcJttxngzjZVYxYTAFfuSfjJw7ih3feyhLde"
+				"bzz-raw://365465a15d2d78a73f51c0dbb0bccc1cfb5e1993aa491d3cf52bd6059b691798",
+				"dweb:/ipfs/QmcaTW21KDjk1P8UB4MvWCTZzyvMaHAFVRde4Ug23kVbmk"
 			]
 		}
 	},

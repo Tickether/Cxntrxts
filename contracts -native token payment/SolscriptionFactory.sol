@@ -11,17 +11,16 @@ contract SolscriptionFactory is ReentrancyGuard {
     Solscription[] public solscriptionContracts;
 
     function createSolscriptionContract(
-        string calldata name, 
-        string calldata symbol, 
+        string memory name, 
+        string memory symbol, 
         uint256 subscriptionFee, 
         uint256 subscriptionFeeNative, 
         uint256 maxMonthlySubs
     ) nonReentrant external returns (address) {
-        Solscription solscription = new Solscription();
+        Solscription solscription = new Solscription(name, symbol);
         
         solscriptionContracts.push(solscription);
 
-        solscription.setNameSymbol(name, symbol);
         solscription.setFeesMaxMonth(subscriptionFee, subscriptionFeeNative, maxMonthlySubs);
         solscription.transferOwnership(msg.sender);
 

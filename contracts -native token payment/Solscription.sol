@@ -42,9 +42,7 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
 
     string public baseTokenURI;
 
-    string public _name;
-
-    string public _symbol;
+    
 
 
     address payable public solscriptionTreasury = payable(0x7ea9114092eC4379FFdf51bA6B72C71265F33e96);
@@ -67,7 +65,7 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
     event Revoke(address indexed to, uint256 indexed tokenId);
 
 
-    constructor() ERC721(_name, _symbol) {}
+    constructor(string memory _name, string memory _symbol) ERC721(_name, _symbol) {}
 
 
 
@@ -145,11 +143,12 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
     /**
     * Set name and symnol 
     */
+    /*
     function setNameSymbol(string memory name, string memory symbol) public onlyOwner {
-        _name = name;
-        _symbol = symbol;
+        name = name;
+        symbol = symbol;
     }
-    
+    */
 
 
 
@@ -330,7 +329,7 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
         address from,
         address to,
         uint256, /* firstTokenId */
-        uint256 batchSize
+        uint256 /* batchSize */
     ) internal virtual override {
         
         require(from == address(0) || to == address(0), "can't transfer token");
@@ -341,7 +340,7 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
         address from,
         address to,
         uint256 firstTokenId,
-        uint256 batchSize
+        uint256 /* batchSize */
     ) internal virtual override  {
         if (from == address(0)) {
             emit Attest(to, firstTokenId);
