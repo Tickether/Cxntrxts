@@ -260,7 +260,7 @@ contract Solscription is ERC721, IERC4907, Ownable, ReentrancyGuard {
             return  _users[tokenId].expires;
         }
         else{
-            return uint256(99999999999999999999999999999999999999999999999999999999999);
+            return uint256(0);
         }
     }
 
