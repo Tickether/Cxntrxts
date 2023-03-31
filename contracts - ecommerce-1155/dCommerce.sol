@@ -144,4 +144,12 @@ contract dCommerce is ERC1155, ERC1155Supply, ERC1155URIStorage, Ownable, ERC115
         super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
         require(from == address(0) , "can't transfer token");
     }
+
+    function withdraw() 
+        external 
+        onlyOwner 
+    {
+        (bool success, ) = msg.sender.call{value: address(this).balance}(""); 
+        require(success, "Transfer failed");
+    }
 }

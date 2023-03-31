@@ -660,6 +660,13 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -873,11 +880,11 @@
 			]
 		},
 		"dCommerce.sol": {
-			"keccak256": "0x3c0e2a226e768749dd91c99c8ffb347bee5be39f9ce7e7368680609d127e7421",
+			"keccak256": "0xf6c1d513062be5c92266f6dae5b969628011ac89bd1f5efd443f61fdecebbd11",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://563e72bf97df8c89427cc732b37e00572f2e2a8edae518e1354cf675caec3dc1",
-				"dweb:/ipfs/QmSaTLxmKS1mPgK7hkngCsAz3o54MAhbZ7RKLxS5QUZVh4"
+				"bzz-raw://ce001367d1f55428d3c4387ee71baaaf300e8e862bc5c375d20e3700471bc887",
+				"dweb:/ipfs/QmeZ3R8UjrWihvFuEvVR6Z87bnpoDPEydkrCYSPKsxwYra"
 			]
 		}
 	},
