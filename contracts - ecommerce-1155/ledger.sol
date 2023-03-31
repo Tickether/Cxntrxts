@@ -23,8 +23,8 @@ contract MyToken is ERC1155, ERC1155Supply, ERC1155URIStorage, Ownable, ERC1155B
     string public symbol;
 
     constructor() ERC1155("") {
-        name = "Ledger";
-        symbol = "LS";
+        name = "dCommerce";
+        symbol = "dC";
 
         /**
         * Network: Sepolia
