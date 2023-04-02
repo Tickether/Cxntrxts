@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-contract dCommerce is ERC1155, ERC1155Supply, ERC1155URIStorage, Ownable, ERC1155Burnable {
+contract dCommerceWTF is ERC1155, ERC1155Supply, ERC1155URIStorage, Ownable, ERC1155Burnable {
     AggregatorV3Interface internal priceFeed;
     
     mapping (uint256 => uint256) public price;
@@ -23,8 +23,8 @@ contract dCommerce is ERC1155, ERC1155Supply, ERC1155URIStorage, Ownable, ERC115
     string public symbol;
 
     constructor() ERC1155("") {
-        name = "dCommerce";
-        symbol = "dC";
+        name = "Ledger dCommerce";
+        symbol = "dC.WTF";
 
         /**
         * Network: Sepolia
@@ -32,8 +32,23 @@ contract dCommerce is ERC1155, ERC1155Supply, ERC1155URIStorage, Ownable, ERC115
         * Address: 0x694AA1769357215DE4FAC081bf1f309aDC325306
         * Decimals: 8
         */
+
+       /**
+        * Network: Mumbai
+        * Aggregator: MATIC/USD
+        * Address: 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
+        * Decimals: 8
+        */
+
+       /**
+        * Network: Goerli
+        * Aggregator: ETH/USD
+        * Address: 0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e
+        * Decimals: 8
+        */
+
         priceFeed = AggregatorV3Interface(
-            0x694AA1769357215DE4FAC081bf1f309aDC325306 // replace with usd and native chain token pair
+            0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e // replace with usd and native chain token pair
         );
     }
 
@@ -110,13 +125,17 @@ contract dCommerce is ERC1155, ERC1155Supply, ERC1155URIStorage, Ownable, ERC115
         public
         payable
     {
+        uint256 totalAmount;
+
         for (uint i = 0; i < ids.length; i++) {
             require(exists(ids[i]), "product not initilized");
             require (price[ids[i]] != 0, "product not active");
 
             uint256 latestPrice = uint256(getLatestPrice(ids[i]));
-            require ((amounts[i] * latestPrice) + shippingFee == msg.value, "price not correct");
+            
+           totalAmount =  (amounts[i] * latestPrice) + totalAmount;
         }
+        require (totalAmount + shippingFee == msg.value, "price not correct"); 
         _mintBatch(to, ids, amounts, "");
     }
 
